@@ -1,0 +1,135 @@
+<html ng-app="testApp">
+<head>
+    <title>Codeforces</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <style media="screen">
+      .container{
+        padding-top: 40px;
+      }
+
+      .problem{
+        margin-bottom: 20px;
+      }
+      .tags{
+        border-radius: 20px;
+      }
+    </style>
+</head>
+<body ng-controller="testController">
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>$http Service Codeforces</h2>
+        </div>
+      </div>
+
+      <form>
+
+        <div class="form-group">
+          <select class="custom-select" ng-model="search" ng-model-options="{ debounce: 800 }">
+            <option value="">Open this select menu</option>
+            <option value="implementation">Implementation</option>
+            <option value="dp">DP</option>
+            <option value="math">Maths</option>
+            <option value="greedy">Greedy</option>
+            <option value="brute force">Brute force</option>
+            <option value="data structures">Data structures</option>
+            <option value="constructive algorithm">Constructive</option>
+            <option value="dfs and similar">Graph Traversal</option>
+            <option value="sortings">Sorting</option>
+            <option value="binary search">Binary search</option>
+            <option value="graphs">Graphs</option>
+            <option value="trees">Trees</option>
+            <option value="strings">String</option>
+            <option value="number theory">Number theory</option>
+            <option value="geometry">Geometry</option>
+            <option value="combinatorics">Combinatorics</option>
+            <option value="two pointers">Two pointers</option>
+            <option value="dsu">DSU</option>
+            <option value="bitmasks">Bitmasking</option>
+            <option value="probabilities">Probability</option>
+            <option value="shortest paths">Shortest paths</option>
+            <option value="hashing">Hashing</option>
+            <option value="divide and conquer">Divide and Conquer</option>
+            <option value="games">Game theory</option>
+            <option value="matrices">matrices</option>
+            <option value="flows">Flows</option>
+            <option value="string suffix structures">Suffix structures</option>
+            <option value="meet-in-the-middle">Meet in the middle</option>
+          </select>
+        </div>
+        <button ng-click="getRequest() "  type="button" class="btn btn-success">Refresh</button>
+
+      </form>
+      <div class="row">
+        <div data-ng-repeat="val in tags" >
+          <div class="col">
+            <button type="button" class="tags btn btn-dark btn-rounded">{{val}}</button>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row problem" >
+        <div class="col-md-5">
+          Problem Name
+        </div>
+        <div class="col-md-1">
+          Points
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col">
+              Contest Name
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-1">
+          Solved Count
+
+        </div>
+
+      </div>
+      <hr>
+      <div class="row problem" data-ng-repeat="problem in response.problems">
+        <div class="col-md-5">
+          <a ng-href="http://codeforces.com/problemset/problem/{{problem.contestId}}/{{problem.index}}" target="_blank">{{problem.name}}</a>
+        </div>
+        <div class="col-md-1">
+          {{problem.points}}
+        </div>
+        <div class="col-md-4">
+          <div class="row" data-ng-repeat="con in contest | filter: { id:problem.contestId } ">
+            <div class="col">
+              {{con.name }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          {{problem.index}}
+        </div>
+        <div class="col-md-1">
+          {{response.problemStatistics[$index].solvedCount}}
+
+        </div>
+
+      </div>
+
+
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
